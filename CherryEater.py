@@ -96,6 +96,12 @@ while running:
     player.left = playerPos[0]
     player.top = playerPos[1]
 
+    # Check if we are colliding with the food
+    if player.colliderect(food):
+        # We are, so...
+        # Randomly reposition it!
+        food.left = random.randint(0, WINDOWWIDTH - FOODSIZE)
+        food.top = random.randint(0, WINDOWHEIGHT - FOODSIZE)
     # ----------------------------------
 
     
