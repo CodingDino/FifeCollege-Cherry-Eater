@@ -56,6 +56,12 @@ SCORE_PADDING = 10
 scoreLabelRect.left = SCORE_PADDING
 scoreLabelRect.top = SCORE_PADDING
 
+# Set up score value
+scoreValue = 0
+scoreValueText = basicFont.render(str(scoreValue), True, BLACK, WHITE)
+scoreValueRect = scoreLabel.get_rect()
+scoreValueRect.left = scoreLabelRect.right + SCORE_PADDING
+scoreValueRect.top = SCORE_PADDING
 # --------------------------------------
 
 
@@ -112,6 +118,8 @@ while running:
         # Randomly reposition it!
         food.left = random.randint(0, WINDOWWIDTH - FOODSIZE)
         food.top = random.randint(0, WINDOWHEIGHT - FOODSIZE)
+        scoreValue += 1
+        scoreValueText = basicFont.render(str(scoreValue), True, BLACK, WHITE)
     # ----------------------------------
 
     
@@ -126,6 +134,7 @@ while running:
     pygame.draw.rect(screen, GREEN, food)
 
     screen.blit(scoreLabel, scoreLabelRect)
+    screen.blit(scoreValueText, scoreValueRect)
 
     # Flip the display
     pygame.display.flip()
