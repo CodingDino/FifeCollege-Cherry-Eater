@@ -20,13 +20,21 @@ import pygame
 pygame.init()
 
 # Set up the drawing window
-screen = pygame.display.set_mode([500, 500])
+WINDOWWIDTH = 500
+WINDOWHEIGHT = 500
+screen = pygame.display.set_mode([WINDOWWIDTH, WINDOWHEIGHT])
 
 # Set up some variables to use later in our game
 running = True
 
+# Set up colours
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+
 # Set up player
-position = [250, 250]
+PLAYERSIZE = 50
+player = pygame.Rect(WINDOWWIDTH/2 - PLAYERSIZE/2, WINDOWHEIGHT/2 - PLAYERSIZE/2, PLAYERSIZE, PLAYERSIZE)
+MOVESPEED = 10
 # --------------------------------------
 
 
@@ -45,13 +53,13 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                position[0] -= 10
+                player.left -= MOVESPEED
             if event.key == pygame.K_RIGHT:
-                position[0] += 10
+                player.left += MOVESPEED
             if event.key == pygame.K_UP:
-                position[1] -= 10
+                player.top -= MOVESPEED
             if event.key == pygame.K_DOWN:
-                position[1] += 10
+                player.top += MOVESPEED
     # ----------------------------------
 
     
@@ -65,10 +73,10 @@ while running:
     # Draw
     # ----------------------------------
     # Fill the background with a colour
-    screen.fill((255, 255, 255))
+    screen.fill(WHITE)
 
     # Draw Everything
-    pygame.draw.circle(screen, (0, 0, 255), position, 75)
+    pygame.draw.rect(screen, BLACK, player)
     
 
     # Flip the display
