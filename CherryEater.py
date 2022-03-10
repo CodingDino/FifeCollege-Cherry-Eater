@@ -9,7 +9,7 @@
 # --------------------------------------
 # Import Libraries
 # --------------------------------------
-import pygame
+import pygame, random
 # --------------------------------------
 
 
@@ -26,6 +26,7 @@ mainClock = pygame.time.Clock()
 WINDOWWIDTH = 1000
 WINDOWHEIGHT = 1000
 screen = pygame.display.set_mode([WINDOWWIDTH, WINDOWHEIGHT])
+pygame.display.set_caption('Cherry Eater')
 
 # Set up some variables to use later in our game
 running = True
@@ -36,7 +37,7 @@ WHITE = (255, 255, 255)
 
 # Set up player
 PLAYERSIZE = 50
-playerPos = [float(WINDOWWIDTH/2 - PLAYERSIZE/2), float(WINDOWHEIGHT/2 - PLAYERSIZE/2)]
+playerPos = [float(random.randint(0, WINDOWWIDTH - PLAYERSIZE)), float(random.randint(0, WINDOWHEIGHT - PLAYERSIZE))]
 player = pygame.Rect(playerPos[0], playerPos[1], PLAYERSIZE, PLAYERSIZE)
 MOVESPEED = 50
 
@@ -58,6 +59,11 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_x:
+                # Teleport the player to a random location!
+                playerPos[0] = random.randint(0, WINDOWWIDTH - PLAYERSIZE)
+                playerPos[1] = random.randint(0, WINDOWHEIGHT - PLAYERSIZE)
 
     # Update our key list
     keys = pygame.key.get_pressed()
