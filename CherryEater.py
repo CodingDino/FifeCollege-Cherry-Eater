@@ -46,6 +46,16 @@ MOVESPEED = 300
 FOODSIZE = 20
 food = pygame.Rect(random.randint(0, WINDOWWIDTH - FOODSIZE), random.randint(0, WINDOWWIDTH - FOODSIZE), FOODSIZE, FOODSIZE)
 
+# Set up fonts
+basicFont = pygame.font.SysFont(None, 48)
+
+# Set up score label
+scoreLabel = basicFont.render('Score:', True, BLACK, WHITE)
+scoreLabelRect = scoreLabel.get_rect()
+SCORE_PADDING = 10
+scoreLabelRect.left = SCORE_PADDING
+scoreLabelRect.top = SCORE_PADDING
+
 # --------------------------------------
 
 
@@ -114,7 +124,8 @@ while running:
     # Draw Everything
     pygame.draw.rect(screen, BLACK, player)
     pygame.draw.rect(screen, GREEN, food)
-    
+
+    screen.blit(scoreLabel, scoreLabelRect)
 
     # Flip the display
     pygame.display.flip()
