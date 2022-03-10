@@ -41,10 +41,7 @@ player = pygame.Rect(playerPos[0], playerPos[1], PLAYERSIZE, PLAYERSIZE)
 MOVESPEED = 50
 
 # Set up movement variables.
-moveLeft = False
-moveRight = False
-moveUp = False
-moveDown = False
+
 # --------------------------------------
 
 
@@ -61,28 +58,9 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                moveLeft = True
-                moveRight = False
-            if event.key == pygame.K_RIGHT:
-                moveRight = True
-                moveLeft = False
-            if event.key == pygame.K_UP:
-                moveUp = True
-                moveDown = False
-            if event.key == pygame.K_DOWN:
-                moveDown = True
-                moveUp = False
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT:
-                moveLeft = False
-            if event.key == pygame.K_RIGHT:
-                moveRight = False
-            if event.key == pygame.K_UP:
-                moveUp = False
-            if event.key == pygame.K_DOWN:
-                moveDown = False
+
+    # Update our key list
+    keys = pygame.key.get_pressed()
     # ----------------------------------
 
     
@@ -96,14 +74,15 @@ while running:
     # Process Movement
     # Scale move speed by time passed since the last frame for consistant movement
     # Use our own position list for this so we can use decimal points!
-    if moveLeft == True:
+    if keys[pygame.K_LEFT]:
         playerPos[0] -= MOVESPEED * frameSec
-    if moveRight == True:
+    if keys[pygame.K_RIGHT]:
         playerPos[0] += MOVESPEED * frameSec
-    if moveUp == True:
+    if keys[pygame.K_UP]:
         playerPos[1] -= MOVESPEED * frameSec
-    if moveDown == True:
+    if keys[pygame.K_DOWN]:
         playerPos[1] += MOVESPEED * frameSec
+        
     # Move the player's rectangle based on the position variable
     player.left = playerPos[0]
     player.top = playerPos[1]
