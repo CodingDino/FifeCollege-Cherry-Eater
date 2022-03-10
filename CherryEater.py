@@ -34,14 +34,17 @@ running = True
 # Set up colours
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
 
 # Set up player
 PLAYERSIZE = 50
 playerPos = [float(random.randint(0, WINDOWWIDTH - PLAYERSIZE)), float(random.randint(0, WINDOWHEIGHT - PLAYERSIZE))]
 player = pygame.Rect(playerPos[0], playerPos[1], PLAYERSIZE, PLAYERSIZE)
-MOVESPEED = 50
+MOVESPEED = 300
 
-# Set up movement variables.
+# Set up food (cherries)
+FOODSIZE = 20
+food = pygame.Rect(random.randint(0, WINDOWWIDTH - FOODSIZE), random.randint(0, WINDOWWIDTH - FOODSIZE), FOODSIZE, FOODSIZE)
 
 # --------------------------------------
 
@@ -92,6 +95,7 @@ while running:
     # Move the player's rectangle based on the position variable
     player.left = playerPos[0]
     player.top = playerPos[1]
+
     # ----------------------------------
 
     
@@ -103,6 +107,7 @@ while running:
 
     # Draw Everything
     pygame.draw.rect(screen, BLACK, player)
+    pygame.draw.rect(screen, GREEN, food)
     
 
     # Flip the display
